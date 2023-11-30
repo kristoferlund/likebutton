@@ -9,8 +9,8 @@ import { Toaster } from "react-hot-toast";
 import { faHourglassEnd } from "@fortawesome/free-solid-svg-icons";
 
 export const metadata: Metadata = {
-  title: "Optimism Attestation Explorer",
-  description: "Browse attestations on Optimism.",
+  title: "likebutton.gg",
+  description: "Its the like button.",
 };
 
 export default function RootLayout({
