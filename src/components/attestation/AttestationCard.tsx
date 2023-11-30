@@ -1,5 +1,6 @@
 import { Attestation } from "../../eas/types/gql/attestation.type";
 import { From } from "../attestation-card/From";
+import Image from "next/image";
 import Link from "next/link";
 import { Recipient } from "../attestation-card/Recipient";
 import { SchemaName } from "../attestation-card/SchemaName";
@@ -16,7 +17,13 @@ export async function AttestationCard({ attestation }: AttestationCardProps) {
   return (
     <Link href={`/user/${attestation.recipient}`}>
       <div className="flex items-center justify-start w-full p-5 text-sm bg-white gap-10 md:text-base gap-x-5 hover:ring-4 hover:ring-theme-3 hover:ring-opacity-40 rounded-xl shadow-theme-shadow-1">
-        <img src="/like-thumb.svg" alt="like" className="w-10 h-10" />
+        <Image
+          src="/like-thumb.svg"
+          alt="like"
+          className="w-10 h-10"
+          width="50"
+          height="50"
+        />
         <UserIcon address={attestation.recipient} plusOne />
         <div className="flex flex-col">
           <Recipient recipient={attestation.recipient} />

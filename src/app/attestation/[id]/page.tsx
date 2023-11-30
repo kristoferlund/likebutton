@@ -44,47 +44,27 @@ export default async function AttestationPage({
 
   return (
     <>
+      <Link
+        href="https://optimism.easscan.org/attestation/attestWithSchema/0x33e9094830a5cba5554d1954310e4fbed2ef5f859ec1404619adea4207f391fd"
+        target="_blank"
+      >
+        <Image
+          src="/click-to-like.svg"
+          alt="Optimism Attestations"
+          width={250}
+          height={40}
+          className="hover:opacity-70 mb-10"
+        />
+      </Link>
       <SearchAndSort />
       <div className="w-full border-b-4 border-theme-gray-1">
-        <div className="text-2xl font-semibold">
-          {schemaData?.name} Attestation
-        </div>
+        <div className="text-2xl font-semibold">Attestation</div>
       </div>
 
       <div className="flex-col w-full p-5 bg-white space-y-5 rounded-xl shadow-theme-shadow-1">
-        {schemaData?.description && (
-          <div className="flex items-center gap-5">
-            <div className="flex-grow">{schemaData.description}</div>
-            <div className="w-28 hidden md:block">
-              <a href={schemaData.projectUrl} target="_blank">
-                <Image
-                  src={schemaData.logo}
-                  width="100"
-                  alt={schemaData?.name}
-                  className="w-28 max-w-none"
-                />
-              </a>
-            </div>
-          </div>
-        )}
         <div className="flex flex-col w-full gap-5 md:flex-row md:justify-between">
           <div className="flex justify-between md:w-2/5">
             <div className="flex flex-col items-start">
-              <div className="flex items-center">
-                <div className="w-12 text-xs text-gray-500">To </div>
-                <Link
-                  href={`/user/${attestation.recipient}`}
-                  className="flex items-center gap-1"
-                >
-                  <UserIcon
-                    address={attestation.recipient}
-                    className="inline-block"
-                    size="tiny"
-                  />
-                  {recipientName || shortenEthAddress(attestation.recipient)}
-                </Link>
-                <CopyButton textToCopy={attestation.recipient} />
-              </div>
               <div className="flex items-center ">
                 <div className="w-12 text-xs text-gray-500">From</div>
                 <Link
@@ -99,6 +79,21 @@ export default async function AttestationPage({
                   {attesterName || shortenEthAddress(attestation.attester)}
                 </Link>
                 <CopyButton textToCopy={attestation.attester} />
+              </div>
+              <div className="flex items-center">
+                <div className="w-12 text-xs text-gray-500">To </div>
+                <Link
+                  href={`/user/${attestation.recipient}`}
+                  className="flex items-center gap-1"
+                >
+                  <UserIcon
+                    address={attestation.recipient}
+                    className="inline-block"
+                    size="tiny"
+                  />
+                  {recipientName || shortenEthAddress(attestation.recipient)}
+                </Link>
+                <CopyButton textToCopy={attestation.recipient} />
               </div>
               <div className="flex items-center">
                 <div className="w-12 text-xs text-gray-500">Uid</div>

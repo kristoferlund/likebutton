@@ -1,11 +1,5 @@
-import Optimism from "./components/images/optimism.svg";
-import { OptimistCustomDisplay } from "./components/attestation/custom-displays/OptimistCustomDisplay";
-import Passport from "./components/images/passport.svg";
-import { PassportCustomDisplay } from "./components/attestation/custom-displays/PassportCustomDisplay";
+import { LikeCustomDisplay } from "./components/attestation/custom-displays/LikeCustomDisplay";
 import Praise from "./components/images/praise.svg";
-import { PraiseCustomDisplay } from "./components/attestation/custom-displays/PraiseCustomDisplay";
-import RegenScore from "./components/images/regenscore.svg";
-import { RegenScoreCustomDisplay } from "./components/attestation/custom-displays/RegenScoreCustomDisplay";
 import { SchemaListItem } from "./eas/types/schema-list-item.type";
 
 export const EAS_API_URL = "https://optimism.easscan.org/graphql";
@@ -35,7 +29,7 @@ export const EAS_SCHEMAS: SchemaListItem[] = [
     description: "Like description.",
     projectUrl: "https://givepraise.xyz/",
     uid: UID_LIKE,
-    displayComponent: PraiseCustomDisplay,
+    displayComponent: LikeCustomDisplay,
     logo: Praise,
     gqlWhere: {
       schemaId: {
