@@ -1,0 +1,40 @@
+{
+  "name": "op-attestation-explorer",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.8.4",
+    "@apollo/experimental-nextjs-app-support": "^0.4.3",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "6.4.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@headlessui/react": "^1.7.17",
+    "@headlessui/tailwindcss": "^0.2.0",
+    "@rainbow-me/rainbowkit": "^1.0.11",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@types/node": "20.5.6",
+    "autoprefixer": "10.4.15",
+    "dayjs": "^1.11.9",
+    "eslint": "8.47.0",
+    "eslint-config-next": "13.4.19",
+    "lodash": "^4.17.21",
+    "next": "13.5.2",
+    "postcss": "8.4.28",
+    "react-hot-toast": "^2.4.1",
+    "tailwindcss": "3.3.3",
+    "typescript": "5.2.2",
+    "viem": "^1.14.0",
+    "wagmi": "^1.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.5",
+    "@types/lodash": "^4.14.198"
+  }
+}

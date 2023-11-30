@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-white;
+}
+
+h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+}
+
+*:focus {
+  @apply outline-none;
+}
+
+.bg-header {
+  background-image: url("/header.svg");
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: contain;
+  background-position-x: left;
+}
+
+.bg-footer {
+  background-image: url("/footer.svg");
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: cover;
+  background-position-x: right;
+}
+
+.bg-dots {
+  background-image: url("/header2.svg");
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: cover;
+  background-position-x: left;
+}
+
+.landingpage-gradient-1 {
+  background-image: radial-gradient(
+    250px 70px ellipse at 50% 50%,
+    #fedcd2,
+    white
+  );
+}
+
+.underline-red {
+  @apply underline decoration-4 decoration-theme-1;
+}
+
+@keyframes scrollHorizontally {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-34.5%);
+  }
+}
