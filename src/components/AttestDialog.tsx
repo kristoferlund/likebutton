@@ -3,6 +3,7 @@ import { EAS, SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
 import { Fragment, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
 import { useSigner } from "../wagmi/hooks/useSigner";
@@ -96,7 +97,16 @@ export default function AttestDialog({
                   </Dialog.Title>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      Enter an ethereum address (no ENS names, sorry).
+                      Enter an ethereum address (no ENS names, sorry). Likes are
+                      stored as on-chain{" "}
+                      <a
+                        href="https://attest.sh/"
+                        target="_blank"
+                        className="underline"
+                      >
+                        EAS
+                      </a>{" "}
+                      attestations on the Optimism L2 network.
                     </p>
                   </div>
                   <input
