@@ -11,6 +11,7 @@ import { faHourglassEnd } from "@fortawesome/free-solid-svg-icons";
 import { wagmiConfig } from "../wagmi/wagmiConfig";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://likebutton.gg"),
   title: "likebutton.gg",
   description: "Yes, this is the like button. Press it and like someone.",
 };
