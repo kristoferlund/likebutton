@@ -12,7 +12,7 @@ import { wagmiConfig } from "../wagmi/wagmiConfig";
 
 export const metadata: Metadata = {
   title: "likebutton.gg",
-  description: "Its the like button.",
+  description: "Yes, this is the like button. Press it and like someone.",
 };
 
 export default function RootLayout({
