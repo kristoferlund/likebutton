@@ -6,7 +6,9 @@ import { Header } from "../components/Header";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
+import { WagmiConfig } from "wagmi";
 import { faHourglassEnd } from "@fortawesome/free-solid-svg-icons";
+import { wagmiConfig } from "../wagmi/wagmiConfig";
 
 export const metadata: Metadata = {
   title: "likebutton.gg",
@@ -21,24 +23,26 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Toaster position="top-center" reverseOrder={false} />
-        <main className="flex flex-col items-center min-h-screen bg-header">
-          <Header />
-          <div className="flex flex-grow flex-col w-full px-5 lg:w-[1024px] items-center gap-5">
-            <Suspense
-              fallback={
-                <FontAwesomeIcon
-                  icon={faHourglassEnd}
-                  spin
-                  className="w-10 h-10 text-theme-2"
-                />
-              }
-            >
-              {children}
-            </Suspense>
-          </div>
-          <Footer />
-        </main>
+        <WagmiConfig config={wagmiConfig}>
+          <Toaster position="top-center" reverseOrder={false} />
+          <main className="flex flex-col items-center min-h-screen bg-header">
+            <Header />
+            <div className="flex flex-grow flex-col w-full px-5 lg:w-[1024px] items-center gap-5">
+              <Suspense
+                fallback={
+                  <FontAwesomeIcon
+                    icon={faHourglassEnd}
+                    spin
+                    className="w-10 h-10 text-theme-2"
+                  />
+                }
+              >
+                {children}
+              </Suspense>
+            </div>
+            <Footer />
+          </main>
+        </WagmiConfig>
       </body>
     </html>
   );

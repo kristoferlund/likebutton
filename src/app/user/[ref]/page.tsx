@@ -4,6 +4,7 @@ import { DEFAULT_REVALIDATE_TIME } from "../../../config";
 import { DecodedData } from "../../../eas/types/decoded-data.type";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import LikeButton from "../../../components/LikeButton";
 import Link from "next/link";
 import { SearchAndSort } from "../../../components/attestations/SearchAndSort";
 import { UserIcon } from "../../../components/user/UserIcon";
@@ -62,19 +63,7 @@ export default async function UserPage({
 
   return (
     <>
-      <Link
-        href="https://optimism.easscan.org/attestation/attestWithSchema/0x33e9094830a5cba5554d1954310e4fbed2ef5f859ec1404619adea4207f391fd"
-        target="_blank"
-      >
-        <Image
-          src="/click-to-like.svg"
-          alt="Optimism Attestations"
-          width={250}
-          height={40}
-          className="hover:opacity-70 mb-10"
-        />
-      </Link>
-
+      <LikeButton />
       <SearchAndSort />
       <div className="w-full border-b-4 border-theme-gray-1">
         <div className="text-2xl font-semibold">User</div>

@@ -10,7 +10,7 @@ import { WagmiConfig } from "wagmi";
 
 export function Header() {
   return (
-    <div className="flex items-start w-full h-40 pt-3 px-7">
+    <div className="flex items-start w-full h-72 md:h-40 pt-3 px-7">
       <div className="flex flex-col items-center justify-between w-full md:flex-row px-7">
         <div className="flex items-center gap-5">
           <div className="py-5">
@@ -25,21 +25,19 @@ export function Header() {
           </div>
         </div>
 
-        <WagmiConfig config={wagmiConfig}>
-          <RainbowKitProvider
-            modalSize="compact"
-            theme={lightTheme({
-              accentColor: "#7082AC",
-              accentColorForeground: "white",
-              borderRadius: "large",
-              fontStack: "system",
-              overlayBlur: "small",
-            })}
-            chains={chains}
-          >
-            <ConnectWallet />
-          </RainbowKitProvider>
-        </WagmiConfig>
+        <RainbowKitProvider
+          modalSize="compact"
+          theme={lightTheme({
+            accentColor: "#7082AC",
+            accentColorForeground: "white",
+            borderRadius: "large",
+            fontStack: "system",
+            overlayBlur: "small",
+          })}
+          chains={chains}
+        >
+          <ConnectWallet />
+        </RainbowKitProvider>
       </div>
     </div>
   );
