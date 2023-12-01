@@ -10,8 +10,8 @@ import { WagmiConfig } from "wagmi";
 
 export function Header() {
   return (
-    <div className="flex items-start w-full h-72 md:h-40 pt-3 px-7">
-      <div className="flex flex-col items-center justify-between w-full md:flex-row px-7">
+    <div className="flex items-start w-full p-10">
+      <div className="flex flex-col items-center gap-5 md:gap-0 md:items-start justify-between w-full md:flex-row">
         <div className="flex items-center gap-5">
           <div className="py-5">
             <Link href="/1">
