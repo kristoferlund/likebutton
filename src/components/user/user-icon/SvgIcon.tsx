@@ -1,6 +1,9 @@
+import Image from "next/image";
+
 type SvgIconProps = {
   size?: "tiny" | "small" | "large";
   className?: string;
+  plusOne?: boolean;
 };
 
 function sizeClass(size: SvgIconProps["size"]) {
@@ -13,10 +16,14 @@ function sizeClass(size: SvgIconProps["size"]) {
   return "h-10 w-10";
 }
 
-export function SvgIcon({ size = "small", className = "" }: SvgIconProps) {
+export function SvgIcon({
+  size = "small",
+  className = "",
+  plusOne,
+}: SvgIconProps) {
   return (
     <div
-      className={`flex items-center justify-center ${sizeClass(
+      className={`flex items-center justify-center relative ${sizeClass(
         size
       )} ${className}`}
     >
@@ -28,6 +35,15 @@ export function SvgIcon({ size = "small", className = "" }: SvgIconProps) {
       >
         <path d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z" />
       </svg>
+      {plusOne && (
+        <Image
+          src="/plus-one.svg"
+          alt="like"
+          className="w-5 h-5 absolute top-6 left-6"
+          width="20"
+          height="20"
+        />
+      )}
     </div>
   );
 }

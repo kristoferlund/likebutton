@@ -52,10 +52,12 @@ export function ImageIcon({
         className={`object-cover max-w-none ${roundedClass} ${sizeClass(size)}`}
       />
       {plusOne && (
-        <img
+        <Image
           src="/plus-one.svg"
           alt="like"
           className="w-5 h-5 absolute top-6 left-6"
+          width="20"
+          height="20"
         />
       )}
     </div>

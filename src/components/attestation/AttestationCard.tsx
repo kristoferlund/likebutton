@@ -46,7 +46,10 @@ export async function AttestationCard({ attestation }: AttestationCardProps) {
               size="tiny"
               className="inline-block"
             />
-            <From from={attestation.attester} />
+            <From
+              from={attestation.attester}
+              className="w-32 whitespace-nowrap overflow-ellipsis overflow-clip"
+            />
           </div>
         </div>
       </div>

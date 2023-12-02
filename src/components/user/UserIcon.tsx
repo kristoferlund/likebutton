@@ -83,7 +83,7 @@ export async function UserIconInner({
       plusOne={plusOne}
     />
   ) : (
-    <SvgIcon size={size} className={className} />
+    <SvgIcon size={size} className={className} plusOne={plusOne} />
   );
 }
 
