@@ -126,3 +126,4 @@ export default async function AttestationPage({
 }
 
 export const revalidate = DEFAULT_REVALIDATE_TIME;
+export const dynamic = "force-static";
