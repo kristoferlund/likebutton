@@ -1,16 +1,16 @@
+import React, { Suspense } from "react";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 import { ATTESTATIONS_PER_PAGE } from "../../config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import React from "react";
 import { getAllAttestationsCount } from "../../eas/getAllAttestationsCount";
 
 type AttestationsPageChooserProps = {
   currentPage: number;
 };
 
-async function AttestationsPageChooser({
+async function AttestationsPageChooserInner({
   currentPage,
 }: AttestationsPageChooserProps) {
   const attestationsCount = await getAllAttestationsCount();
@@ -72,4 +72,12 @@ async function AttestationsPageChooser({
   );
 }
 
-export default AttestationsPageChooser;
+export default function AttestationsPageChooser(
+  props: AttestationsPageChooserProps
+) {
+  return (
+    <Suspense fallback={null}>
+      <AttestationsPageChooserInner {...props} />
+    </Suspense>
+  );
+}
