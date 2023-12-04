@@ -21,8 +21,8 @@ export default async function AttestationListPage({
       <SearchAndSort />
       {/* <Suspense fallback={<AttestationsLoadingList />}>
         <AttestationList page={params.pageNumber} />
-      </Suspense>
-      <AttestationsPageChooser currentPage={params.pageNumber} /> */}
+      </Suspense> */}
+      <AttestationsPageChooser currentPage={params.pageNumber} />
     </>
   );
 }
