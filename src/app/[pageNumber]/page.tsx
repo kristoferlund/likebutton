@@ -19,10 +19,10 @@ export default async function AttestationListPage({
     <>
       <LikeButton />
       <SearchAndSort />
-      <Suspense fallback={<AttestationsLoadingList />}>
+      {/* <Suspense fallback={<AttestationsLoadingList />}>
         <AttestationList page={params.pageNumber} />
       </Suspense>
-      <AttestationsPageChooser currentPage={params.pageNumber} />
+      <AttestationsPageChooser currentPage={params.pageNumber} /> */}
     </>
   );
 }
