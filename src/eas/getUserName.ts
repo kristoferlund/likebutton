@@ -9,7 +9,11 @@ import { getPraiseUserByAddress } from "../praise/getPraiseUserByAddress";
 export async function getUserName(address: string) {
   let username;
 
-  username = await getEnsName(address);
+  try {
+    username = await getEnsName(address);
+  } catch (e) {
+    // Ignore
+  }
 
   // Get username from Optimist attestation
   if (!username) {

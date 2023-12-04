@@ -1,20 +1,15 @@
-import React from "react";
 import { normalize } from "viem/ens";
 import { publicClient } from "./client";
+import { unstable_cache } from "next/cache";
 
-export const getEnsAvatar = React.cache(async (address: string) => {
-  try {
-    const ensName = await publicClient.getEnsName({
-      address: address as `0x${string}`,
+export const getEnsAvatar = unstable_cache(async (address: string) => {
+  const ensName = await publicClient.getEnsName({
+    address: address as `0x${string}`,
+  });
+  if (ensName) {
+    const ensAvatar = await publicClient.getEnsAvatar({
+      name: normalize(ensName),
     });
-    if (ensName) {
-       const ensAvatar = await publicClient.getEnsAvatar({
-        name: normalize(ensName),
-      });
-      return ensAvatar;
-    }
-  } catch (e) {
-    console.error(e);
-    return null;
+    return ensAvatar;
   }
 });

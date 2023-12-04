@@ -1,7 +1,7 @@
-import React from "react";
 import { WHERE_ALL_SCHEMAS } from "../config";
 import { getClient } from "../apollo/getClient";
 import { gql } from "@apollo/client";
+import { unstable_cache } from "next/cache";
 
 const query = gql`
   query AggregateAttestation($where: AttestationWhereInput) {
@@ -13,7 +13,7 @@ const query = gql`
   }
 `;
 
-export const getAllAttestationsCount = React.cache(
+export const getAllAttestationsCount = unstable_cache(
   async (): Promise<number> => {
     const result = await getClient().query<AllAttestationsCountResult>({
       query,

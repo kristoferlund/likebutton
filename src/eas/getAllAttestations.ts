@@ -1,10 +1,10 @@
 import { AllAttestationsResult } from "./types/gql/all-attestations-result.type";
 import { Attestation } from "./types/gql/attestation.type";
 import { CORE_ATTESTATION_FIELDS } from "./types/fragments/core-attestation-fields.fragment";
-import React from "react";
 import { WHERE_ALL_SCHEMAS } from "../config";
 import { getClient } from "../apollo/getClient";
 import { gql } from "@apollo/client";
+import { unstable_cache } from "next/cache";
 const query = gql`
   ${CORE_ATTESTATION_FIELDS}
   query Attestations($where: AttestationWhereInput, $take: Int, $skip: Int) {
@@ -19,7 +19,7 @@ const query = gql`
   }
 `;
 
-export const getAllAttestations = React.cache(
+export const getAllAttestations = unstable_cache(
   async (take: number, skip: number): Promise<Attestation[]> => {
     const result = await getClient().query<AllAttestationsResult>({
       query,

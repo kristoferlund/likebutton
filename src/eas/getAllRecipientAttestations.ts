@@ -1,10 +1,10 @@
 import { AllAttestationsResult } from "./types/gql/all-attestations-result.type";
 import { Attestation } from "./types/gql/attestation.type";
 import { CORE_ATTESTATION_FIELDS } from "./types/fragments/core-attestation-fields.fragment";
-import React from "react";
 import { WHERE_ALL_SCHEMAS } from "../config";
 import { getClient } from "../apollo/getClient";
 import { gql } from "@apollo/client";
+import { unstable_cache } from "next/cache";
 
 const query = gql`
   ${CORE_ATTESTATION_FIELDS}
@@ -15,7 +15,7 @@ const query = gql`
   }
 `;
 
-export const getAllRecipientAttestations = React.cache(
+export const getAllRecipientAttestations = unstable_cache(
   async (address: string): Promise<Attestation[]> => {
     const where = {
       ...WHERE_ALL_SCHEMAS,

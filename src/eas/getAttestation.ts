@@ -4,6 +4,7 @@ import { CORE_ATTESTATION_FIELDS } from "./types/fragments/core-attestation-fiel
 import React from "react";
 import { getClient } from "../apollo/getClient";
 import { gql } from "@apollo/client";
+import { unstable_cache } from "next/cache";
 
 const query = gql`
   ${CORE_ATTESTATION_FIELDS}
@@ -14,7 +15,7 @@ const query = gql`
   }
 `;
 
-export const getAttestation = React.cache(
+export const getAttestation = unstable_cache(
   async (id: string): Promise<Attestation> => {
     const result = await getClient().query<AttestationResult>({
       query,
