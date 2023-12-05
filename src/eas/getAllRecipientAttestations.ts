@@ -1,7 +1,8 @@
+import { DEFAULT_REVALIDATE_TIME, WHERE_ALL_SCHEMAS } from "../config";
+
 import { AllAttestationsResult } from "./types/gql/all-attestations-result.type";
 import { Attestation } from "./types/gql/attestation.type";
 import { CORE_ATTESTATION_FIELDS } from "./types/fragments/core-attestation-fields.fragment";
-import { WHERE_ALL_SCHEMAS } from "../config";
 import { getClient } from "../apollo/getClient";
 import { gql } from "@apollo/client";
 import { unstable_cache } from "next/cache";
@@ -40,5 +41,7 @@ export const getAllRecipientAttestations = unstable_cache(
     }
 
     return result.data.attestations;
-  }
+  },
+  ["getAllRecipientAttestations"],
+  { revalidate: DEFAULT_REVALIDATE_TIME }
 );

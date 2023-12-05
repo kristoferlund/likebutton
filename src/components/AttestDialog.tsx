@@ -3,8 +3,8 @@ import { EAS, SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
 import { Fragment, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import { revalidateCache } from "../actions";
 import toast from "react-hot-toast";
 import { useSigner } from "../wagmi/hooks/useSigner";
 
@@ -46,8 +46,8 @@ export default function AttestDialog({
           data: encodedData,
         },
       });
-
       await tx.wait();
+      await revalidateCache();
       toast.success("Like sent!");
       setIsOpen(false);
     } catch (e) {

@@ -1,3 +1,4 @@
+import { DEFAULT_REVALIDATE_TIME } from "../config";
 import { getClient } from "../apollo/getClient";
 import { getSchemaData } from "./getSchemaData";
 import { gql } from "@apollo/client";
@@ -29,5 +30,7 @@ export const getAllSchemaAttestationsCount = unstable_cache(
     }
 
     return result.data.aggregateAttestation._count.id;
-  }
+  },
+  ["getAllSchemaAttestationsCount"],
+  { revalidate: DEFAULT_REVALIDATE_TIME }
 );
