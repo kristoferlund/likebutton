@@ -3,11 +3,9 @@ import { CustomDisplay } from "../../../components/attestation/CustomDisplay";
 import { DEFAULT_REVALIDATE_TIME } from "../../../config";
 import { DecodedData } from "../../../eas/types/decoded-data.type";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image";
 import LikeButton from "../../../components/LikeButton";
 import Link from "next/link";
 import { RawData } from "../../../components/attestation/RawData";
-import { SchemaName } from "../../../components/attestation-card/SchemaName";
 import { SearchAndSort } from "../../../components/attestations/SearchAndSort";
 import { UserIcon } from "../../../components/user/UserIcon";
 import dayjs from "dayjs";
@@ -126,4 +124,3 @@ export default async function AttestationPage({
 }
 
 export const revalidate = DEFAULT_REVALIDATE_TIME;
-export const dynamic = "force-static";
