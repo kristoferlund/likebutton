@@ -16,9 +16,9 @@ const query = gql`
   }
 `;
 
-export const getAttestation = (id: string) =>
-  unstable_cache(
-    async (id: string): Promise<Attestation> => {
+export const getAttestation = async (id: string): Promise<Attestation> => {
+  return unstable_cache(
+    async (): Promise<Attestation> => {
       const result = await getClient().query<AttestationResult>({
         query,
         fetchPolicy: "cache-first",
@@ -34,4 +34,5 @@ export const getAttestation = (id: string) =>
     },
     [`getAttestation_${id}`],
     { revalidate: DEFAULT_REVALIDATE_TIME }
-  );
+  )();
+};
