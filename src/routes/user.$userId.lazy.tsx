@@ -7,7 +7,6 @@ import { SearchAndSort } from "../components/attestations/SearchAndSort";
 import { UserIcon } from "../components/user/UserIcon";
 import { shortenEthAddress } from "../util/string";
 import { useAllRecipientAttestations } from "../eas/useAllRecipientAttestations";
-import { AttestationCard } from "../components/attestation/AttestationCard";
 import { useEnsName } from "../ens/useEnsName";
 import { useEnsAddress } from "../ens/useEnsAddress";
 import { AttestationCardAlt } from "../components/attestation/AttestationCardAlt";
@@ -77,8 +76,8 @@ function Page() {
         {attestations.length > 0 && (
           <ol className="w-full">
             {attestations.map((att) => (
-              <li key={att.id} className="pb-5">
-                <AttestationCardAlt attestation={att} />
+              <li key={(att as any).id} className="pb-5">
+                <AttestationCardAlt attestation={att as any} />
               </li>
             ))}
           </ol>

@@ -17,8 +17,8 @@ export function AttestationList({ page }: AttestationListProps) {
   return (
     <ol className="w-full @container">
       {data.attestations.map((att) => (
-        <li key={att.id} className="pb-5">
-          <AttestationCard attestation={att} />
+        <li key={(att as any).id} className="pb-5">
+          <AttestationCard attestation={att as any} />
         </li>
       ))}
     </ol>
