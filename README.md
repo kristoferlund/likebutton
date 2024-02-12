@@ -8,7 +8,7 @@
 
 ---
 
-This is a [Next.js](https://nextjs.org/) project.
+This is a [Vite](https://vitejs.dev/) project.
 
 ## Run locally
 

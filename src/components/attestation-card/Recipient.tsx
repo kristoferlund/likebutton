@@ -1,14 +1,18 @@
+import { mainnet, useEnsName } from "wagmi";
+
 import React from "react";
-import { getEnsName } from "../../viem/getEnsName";
-import { getUserName } from "../../eas/getUserName";
 import { shortenEthAddress } from "../../util/string";
 
 type RecipientProps = {
   recipient: string;
 };
 
-export async function RecipientInner({ recipient }: RecipientProps) {
-  const username = await getUserName(recipient);
+export function RecipientInner({ recipient }: RecipientProps) {
+  // const { data: username } = useEnsName(recipient);
+  const { data: username } = useEnsName({
+    address: recipient as `0x${string}`,
+    chainId: mainnet.id,
+  });
 
   if (recipient === "0x0000000000000000000000000000000000000000") {
     return <div>No recipient</div>;
@@ -21,7 +25,7 @@ export async function RecipientInner({ recipient }: RecipientProps) {
   );
 }
 
-export async function Recipient({ recipient }: RecipientProps) {
+export function Recipient({ recipient }: RecipientProps) {
   return (
     <React.Suspense
       fallback={

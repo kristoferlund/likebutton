@@ -4,19 +4,21 @@ import { Fragment, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
-import { revalidateCache } from "../actions";
 import toast from "react-hot-toast";
 import { useSigner } from "../wagmi/hooks/useSigner";
+import { isAddress } from "viem/utils";
+import { publicClient } from "../viem/client";
+import { queryClient } from "../main";
 
 export default function AttestDialog({
   isOpen,
   setIsOpen,
 }: {
   isOpen: boolean;
-  setIsOpen: any;
+  setIsOpen: (isOpen: boolean) => void;
 }) {
   const signer = useSigner();
-  const [address, setAddress] = useState("");
+  const [userId, setUserId] = useState("");
   const [isAttesting, setIsAttesting] = useState(false);
 
   async function attest() {
@@ -24,8 +26,23 @@ export default function AttestDialog({
 
     setIsAttesting(true);
 
+    let address = userId;
+    try {
+      if (!isAddress(userId)) {
+        const result = await publicClient.getEnsAddress({
+          name: userId,
+        });
+        address = result as string;
+      }
+    } catch (e) {
+      console.error(e);
+      toast.error("Failed to resolve ENS name");
+      setIsAttesting(false);
+      return;
+    }
+
     const eas = new EAS("0x4200000000000000000000000000000000000021");
-    eas.connect(signer as any);
+    eas.connect(signer);
 
     // Initialize SchemaEncoder with the schema string
     const schemaEncoder = new SchemaEncoder("bool like");
@@ -47,8 +64,8 @@ export default function AttestDialog({
         },
       });
       await tx.wait();
-      await revalidateCache();
       toast.success("Like sent!");
+      queryClient.invalidateQueries();
       setIsOpen(false);
     } catch (e) {
       console.error(e);
@@ -78,7 +95,7 @@ export default function AttestDialog({
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
+            <div className="flex items-center justify-center min-h-full p-4 text-center">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -88,39 +105,36 @@ export default function AttestDialog({
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
-                  >
+                <Dialog.Panel className="flex flex-col w-full max-w-md gap-5 p-6 overflow-hidden text-center align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                  <Dialog.Title className="text-2xl font-semibold text-gray-900">
                     Who do you like?
                   </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Enter an ethereum address (no ENS names, sorry). Likes are
-                      stored as on-chain{" "}
-                      <a
-                        href="https://attest.sh/"
-                        target="_blank"
-                        className="underline"
-                      >
-                        EAS
-                      </a>{" "}
-                      attestations on the Optimism L2 network.
-                    </p>
+
+                  <div>
+                    Enter an ethereum address or ENS name. Likes are stored as
+                    on-chain{" "}
+                    <a
+                      href="https://attest.sh/"
+                      target="_blank"
+                      className="underline"
+                    >
+                      EAS
+                    </a>{" "}
+                    attestations on the Optimism L2 network.
                   </div>
+
                   <input
                     type="text"
-                    className="w-full mt-2 disabled:opacity-50"
-                    onChange={(e) => setAddress(e.target.value)}
-                    value={address}
+                    className="w-full disabled:opacity-50"
+                    onChange={(e) => setUserId(e.target.value)}
+                    value={userId}
                     disabled={isAttesting}
                   />
 
-                  <div className="mt-4">
+                  <div className="flex justify-center w-full">
                     <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-theme-3/50 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-theme-2/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      type="submit"
+                      className="flex items-center justify-center px-4 py-2 font-medium text-blue-900 border border-transparent rounded-xl bg-theme-3/50 hover:bg-theme-2/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={() => attest()}
                       disabled={isAttesting}
                     >
@@ -128,7 +142,7 @@ export default function AttestDialog({
                         <>
                           <FontAwesomeIcon
                             icon={faCircleNotch}
-                            className="mr-2 w-4 h-4"
+                            className="w-4 h-4 mr-2"
                             spin
                           />
                           Sending like

@@ -1,14 +1,11 @@
-import { gql } from "@apollo/client";
+import { graphql } from "../../../gql";
 
-export const CORE_ATTESTATION_FIELDS = gql`
-  fragment CoreAttestationFields on Attestation {
+export const AttestationWithCoreFieldsFragment = graphql(`
+  fragment AttestationWithCoreFields on Attestation {
     id
     time
     attester
     recipient
     decodedDataJson
-    expirationTime
-    revoked
-    schemaId
   }
-`;
+`);

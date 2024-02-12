@@ -1,23 +1,19 @@
-import { Attestation } from "../../eas/types/gql/attestation.type";
+import { Link } from "@tanstack/react-router";
+import { AttestationWithCoreFieldsFragment } from "../../gql/graphql";
 import { From } from "../attestation-card/From";
-import Image from "next/image";
-import Link from "next/link";
 import { Recipient } from "../attestation-card/Recipient";
-import { SchemaName } from "../attestation-card/SchemaName";
 import { Time } from "../attestation-card/Time";
-import { Uid } from "../attestation-card/Uid";
 import { UserIcon } from "../user/UserIcon";
-import { getUserName } from "../../eas/getUserName";
 
 type AttestationCardProps = {
-  attestation: Attestation;
+  attestation: AttestationWithCoreFieldsFragment;
 };
 
-export async function AttestationCard({ attestation }: AttestationCardProps) {
+export function AttestationCard({ attestation }: AttestationCardProps) {
   return (
-    <Link href={`/user/${attestation.recipient}`}>
-      <div className="flex items-center justify-start w-full p-5 text-sm bg-white gap-10 md:text-base gap-x-5 hover:ring-4 hover:ring-theme-3 hover:ring-opacity-40 rounded-xl shadow-theme-shadow-1">
-        <Image
+    <Link to={"/user/$userId"} params={{ userId: attestation.recipient }}>
+      <div className="flex items-center justify-start w-full gap-10 p-5 text-sm text-black bg-white md:text-base gap-x-5 hover:ring-4 hover:ring-theme-3 hover:ring-opacity-40 rounded-xl shadow-theme-shadow-1">
+        <img
           src="/like-thumb.svg"
           alt="like"
           className="w-10 h-10"

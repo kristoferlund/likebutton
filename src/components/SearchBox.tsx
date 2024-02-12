@@ -4,21 +4,17 @@ import { KeyboardEvent, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "@tanstack/react-router";
 
 export function SearchBox() {
-  const [error, setError] = useState<string>();
+  const [error] = useState<string>();
+  const navigate = useNavigate();
 
   function handleKeyUp(event: KeyboardEvent) {
     if (event.key === "Enter") {
       if (event.target instanceof HTMLInputElement) {
         const value = event.target.value;
-        if (value.length === 66) {
-          // search by attestation
-          window.location.href = `/attestation/${value}`;
-          return;
-        }
-        // search by user address or ens name
-        window.location.href = `/user/${value}`;
+        navigate({ to: "/user/$userId", params: { userId: value } });
         return;
       }
     }
@@ -32,7 +28,7 @@ export function SearchBox() {
       />
       <input
         type="text"
-        placeholder="Search by ENS / Address / Txn hash "
+        placeholder="Search by ENS / Address"
         className="w-full p-2 pl-10 border-none hover:ring-4 hover:ring-theme-3 hover:ring-opacity-40 focus:ring-4 focus:ring-theme-3 rounded-xl shadow-theme-shadow-1 focus:shadow-theme-shadow-1"
         onKeyUp={handleKeyUp}
         spellCheck={false}

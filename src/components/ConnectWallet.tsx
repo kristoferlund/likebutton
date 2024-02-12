@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useAccount } from "wagmi";
 
@@ -30,12 +29,12 @@ export default function ConnectWallet() {
   return (
     <div className="flex gap-[12px]">
       {localState.isConnected && (
-        <Link
+        <a
           href={`/user/${localState.address}`}
           className={`px-3 py-2 transition-all bg-white rounded-xl shadow-theme-shadow-1 hover:scale-105 text-theme-1`}
         >
           <FontAwesomeIcon icon={faUser} className="w-4 h-4" />
-        </Link>
+        </a>
       )}
       <ConnectButton
         showBalance={false}

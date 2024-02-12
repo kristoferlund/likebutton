@@ -1,5 +1,6 @@
+import { mainnet, useEnsName } from "wagmi";
+
 import React from "react";
-import { getUserName } from "../../eas/getUserName";
 import { shortenEthAddress } from "../../util/string";
 
 type FromProps = {
@@ -7,8 +8,12 @@ type FromProps = {
   className?: string;
 };
 
-export async function FromInner({ from, className }: FromProps) {
-  const username = await getUserName(from);
+export function FromInner({ from, className }: FromProps) {
+  // const { data: username } = useEnsName(from);
+  const { data: username } = useEnsName({
+    address: from as `0x${string}`,
+    chainId: mainnet.id,
+  });
 
   return (
     <div className={`whitespace-nowrap ${className}`}>
@@ -17,7 +22,7 @@ export async function FromInner({ from, className }: FromProps) {
   );
 }
 
-export async function From({ from, className }: FromProps) {
+export function From({ from, className }: FromProps) {
   return (
     <React.Suspense
       fallback={

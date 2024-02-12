@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { SvgIcon } from "./SvgIcon";
 import { useState } from "react";
 
@@ -43,7 +42,7 @@ export function ImageIcon({
         size
       )} ${className}`}
     >
-      <Image
+      <img
         src={url}
         onError={(): void => setImageLoadError(true)}
         alt="avatar"
@@ -52,7 +51,7 @@ export function ImageIcon({
         className={`object-cover max-w-none ${roundedClass} ${sizeClass(size)}`}
       />
       {plusOne && (
-        <Image
+        <img
           src="/plus-one.svg"
           alt="like"
           className="w-5 h-5 absolute top-6 left-6"

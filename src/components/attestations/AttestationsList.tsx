@@ -1,19 +1,22 @@
 import { ATTESTATIONS_PER_PAGE } from "../../config";
 import { AttestationCard } from "../attestation/AttestationCard";
-import { getAllAttestations } from "../../eas/getAllAttestations";
+import { useAllAttestations } from "../../eas/useAllAttestations";
 
 type AttestationListProps = {
   page: number;
 };
-export async function AttestationList({ page }: AttestationListProps) {
-  const attestations = await getAllAttestations(
+export function AttestationList({ page }: AttestationListProps) {
+  const { data } = useAllAttestations(
     ATTESTATIONS_PER_PAGE,
     (page - 1) * ATTESTATIONS_PER_PAGE
   );
 
+  if (!data) return null;
+
+  data.attestations;
   return (
     <ol className="w-full @container">
-      {attestations.map((att) => (
+      {data.attestations.map((att) => (
         <li key={att.id} className="pb-5">
           <AttestationCard attestation={att} />
         </li>
